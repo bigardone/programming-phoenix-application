@@ -15,7 +15,7 @@ let Player = {
       videoId: playerId,
       events: {
         'onReady': event => this.onPlayerReady(event),
-        'onStateChange': event => this.onPlayerStateChange 
+        'onStateChange': event => this.onPlayerStateChange
       }
     })
   },
@@ -23,7 +23,13 @@ let Player = {
   onPlayerReady (event) { /* this.player.playVideo() */ },
 
   onPlayerStateChange (event) {},
-  getCurrentTime () { return Math.floor(this.player.getCurrentTime() * 1000) },
+  getCurrentTime () {
+    try {
+      return Math.floor(this.player.getCurrentTime() * 1000)
+    } catch (e) {
+      return 0
+    }
+  },
   seekTo (millsec) { return this.player.seekTo(millsec / 1000) }
 }
 
